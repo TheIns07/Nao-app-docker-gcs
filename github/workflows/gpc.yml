@@ -21,7 +21,7 @@ jobs:
         export_default_credentials: true
 
     - name: Build Docker Image
-      run: docker build -t ${{ env.IMAGE_NAME }}:latest .
+      run: docker build -t nao-app:latest .
 
     - name: Automatic Tagging of Releases
       id: increment-git-tag
@@ -37,16 +37,16 @@ jobs:
       env:
         GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
       run: |-
-        docker tag ${{ env.IMAGE_NAME }}:latest gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}:latest
-        docker tag ${{ env.IMAGE_NAME }}:latest gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}:$GIT_TAG
-        docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}:latest
-        docker push gcr.io/$PROJECT_ID/${{ env.IMAGE_NAME }}:$GIT_TAG
+        docker tag nao-app:latest gcr.io/6b58f6201069/nao-app:latest
+        docker tag nao-app:latest gcr.io/6b58f6201069/nao-app:$GIT_TAG
+        docker push gcr.io/6b58f6201069/nao-app:latest
+        docker push gcr.io/6b58f6201069/nao-app:$GIT_TAG
 
     - name: Push Docker Image to Artifact Registry
       env:
         GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
       run: |-
-        docker tag ${{ env.IMAGE_NAME }}:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker tag ${{ env.IMAGE_NAME }}:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
-        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/${{ env.IMAGE_NAME }}:latest
-        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/${{ env.IMAGE_NAME }}:$GIT_TAG
+        docker tag nao-app:latest us-west2-docker.pkg.dev/6b58f6201069/images/$IMAGE_NAME:latest
+        docker tag nao-app:latest us-west2-docker.pkg.dev/6b58f6201069/images/$IMAGE_NAME:$GIT_TAG
+        docker push us-west2-docker.pkg.dev/6b58f6201069/images/nao-app:latest
+        docker push us-west2-docker.pkg.dev/6b58f6201069/images/nao-app:$GIT_TAG
