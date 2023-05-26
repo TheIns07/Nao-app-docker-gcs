@@ -9,6 +9,7 @@ COPY . .
 
 # Instala las dependencias del proyecto
 RUN npm install
+RUN npm run lint
 
 # Expone el puerto 3000 (o el puerto que uses para tu aplicación React)
 EXPOSE 3000
