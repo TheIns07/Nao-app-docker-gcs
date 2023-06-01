@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>
-         Configuración de NAO inicial para pruebas en Google Cloud.
+         Configuración de NAO inicial para pruebas en Google Cloud O:
         </h1>
       </header>
     </div>
